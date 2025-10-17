@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm sản phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card {
+            max-width: 550px;
+            margin: 50px auto;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            padding: 15px 0;
+        }
+        .btn-primary {
+            width: 100%;
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-header">
+        🛒 Thêm sản phẩm mới
+    </div>
+    <div class="card-body">
+        <form th:action="@{/product/save}" method="post" th:object="${product}">
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Tên sản phẩm:</label>
+                <input type="text" th:field="*{name}" class="form-control" placeholder="Nhập tên sản phẩm...">
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Danh mục:</label>
+                <select class="form-select" th:field="*{category.id}">
+                    <option value="" disabled selected>-- Chọn danh mục --</option>
+                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Giá bắt đầu (VND):</label>
+                <input type="number" th:field="*{price}" class="form-control" placeholder="Nhập giá tối thiểu 100,000...">
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Trạng thái:</label>
+                <select class="form-select" th:field="*{status}">
+                    <option value="Chưa bán" selected>Chưa bán</option>
+                    <option value="Đã bán">Đã bán</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+</body>
+</html>
