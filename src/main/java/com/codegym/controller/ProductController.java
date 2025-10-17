@@ -90,6 +90,10 @@ public class ProductController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             Model model) {
 
+        if ((name == null || name.isEmpty()) && categoryId == null && price == null) {
+            return "redirect:/product";
+        }
+
         Category category = null;
         if (categoryId != null) {
             category = (Category) categoryService.findById(categoryId).get();

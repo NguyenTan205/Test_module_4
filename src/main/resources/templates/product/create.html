@@ -10,6 +10,7 @@
             background-color: #f8f9fa;
             font-family: 'Segoe UI', sans-serif;
         }
+
         .card {
             max-width: 550px;
             margin: 50px auto;
@@ -17,6 +18,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         .card-header {
             background-color: #0d6efd;
             color: white;
@@ -27,6 +29,7 @@
             border-top-right-radius: 16px;
             padding: 15px 0;
         }
+
         .btn-primary {
             width: 100%;
             font-weight: 500;
@@ -39,7 +42,7 @@
 
 <div class="card">
     <div class="card-header">
-        🛒 Thêm sản phẩm mới
+        Thêm sản phẩm mới
     </div>
     <div class="card-body">
         <form th:action="@{/product/save}" method="post" th:object="${product}">
@@ -60,7 +63,8 @@
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Giá bắt đầu (VND):</label>
-                <input type="number" th:field="*{price}" class="form-control" placeholder="Nhập giá tối thiểu 100,000...">
+                <input type="number" th:field="*{price}" class="form-control"
+                       placeholder="Nhập giá tối thiểu 100,000...">
                 <div class="text-danger small mt-1" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
             </div>
 
@@ -73,6 +77,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+            <a th:href="@{/product}" class="btn btn-secondary mt-2">⬅️ Quay lại danh sách</a>
 
         </form>
     </div>
